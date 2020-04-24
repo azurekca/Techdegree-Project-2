@@ -32,9 +32,54 @@ function showPage(listElements, pageNum) {
 	}
 }
 
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
+/**
+ * Generates a list of links that enable the user
+ * to navigate the paginated student list
+ * @param {object} listElements - HTMLCollection of student list items
+ */
+function appendPageLinks(listElements) {
+   // Determine how many links will be required
+   const numPages = Math.ceil(listElements.length / ITEMS_TO_SHOW);
+   // set up new div and ul to add links to
+   const pageDiv = document.getElementsByClassName('page')[0];
+   const linkDiv = document.createElement('div');
+   linkDiv.classList = 'pagination';
+   const ul = document.createElement('ul');
 
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+   // make pagination links
+   for (let i = 1; i <= numPages; i++) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.setAttribute("href", "#");
+      a.innerText = i;
+      li.appendChild(a);
+      ul.appendChild(li);
+   }
+   // add 'active' class to first link
+   ul.firstElementChild.firstElementChild.classList.add('active');
+
+   // add ul with links to page
+   linkDiv.appendChild(ul);
+   pageDiv.appendChild(linkDiv);
+
+   // add event handler to pagination links
+   linkDiv.addEventListener('click', event => {
+      if (event.target.tagName === 'A') {
+         const a = event.target; // the 'a' element that was clicked
+         const pageNum = a.innerText; // number of which link was clicked
+
+         // call showPage function with the page number
+         showPage(listElements, pageNum);
+         // toggle 'active' class from previously active link to clicked link
+         document.querySelector('a.active').classList.remove('active');
+         a.classList.add('active');
+      }
+   })
+}
+
+
+
+// Start on first page of students
+showPage(studentListElements, 1);
+
+appendPageLinks(studentListElements);
