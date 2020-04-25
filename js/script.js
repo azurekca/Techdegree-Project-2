@@ -8,7 +8,7 @@ FSJS project 2 - List Filter and Pagination
  *  ITEMS_TO_SHOW - number of student list elements to show per page
  *  studentListElements - HTMLCollection of student list items
  */
-const ITEMS_TO_SHOW = 5;
+const ITEMS_TO_SHOW = 10;
 const studentListElements = document.getElementsByClassName('student-item');
 
 /**
@@ -92,7 +92,8 @@ function addSearchBar(listElements) {
 	// search input
 	const input = document.createElement('input');
 	input.setAttribute('type', 'search');
-	input.setAttribute('id', 'search');
+   input.setAttribute('id', 'search');
+   input.placeholder = 'Search for students'
 	form.appendChild(input);
 	// submit button
 	const button = document.createElement('button');
@@ -114,9 +115,11 @@ function addSearchBar(listElements) {
 			if (name.includes(searchStr)) results.push(listElements[i]);
 		}
       // hide all student-items and remove pagination links
+      // and any previous no results message
 		showPage(studentListElements, 0);
 		const paginationDiv = document.querySelector('.pagination');
       if (paginationDiv) paginationDiv.remove();
+      p.textContent = '';
 
 		// if there are any results, call showPage and appendPageLinks with results
 		if (results.length > 0) {
