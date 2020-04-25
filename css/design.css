@@ -15,7 +15,7 @@ body{
 .page-header{
   margin-bottom: 20px;
 }
-  .page-header h2{
+.page-header h2{
     float: left;
     font-size: 22px;
     text-transform: uppercase;
@@ -25,6 +25,9 @@ body{
 
   .page-header .student-search{
     float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
     .page-header .student-search input{
@@ -38,9 +41,18 @@ body{
       border-radius: 5px;
       border: 1px solid #eaeaea;
       padding: 8px 15px;
+      margin-left: 4px;
       font-size: 14px;
       background-color: #4ba6c3;
       color: #fff
+    }
+
+    .page-header .student-search p {
+      color: red;
+      font-size: 1.4rem;
+      padding-right: 2rem;
+      /* font-style: italic; */
+      font-family: Georgia, 'Times New Roman', Times, serif
     }
 
 .student-list{}
